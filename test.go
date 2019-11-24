@@ -4,30 +4,32 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"os"
 
 	"github.com/golang/glog"
+	"github.com/gorilla/mux"
 )
 
-func main() {
-	fmt.Println(os.Args[1])
+func homeLink(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Welcome home!")
+}
+
+func getWeather(w http.ResponseWriter, r *http.Request) {
+	city := r.URL.Query().Get("city")
 	key := "03add4c278668e54404560d4ff48d568"
-	city := os.Args[1]
 	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/weather?q=%s&APPID=%s", city, key)
 	resp, err := http.Get(url)
-
 	if err != nil {
-		glog.Error(err.Error())
-		return
+		panic(err)
 	}
 	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		fmt.Printf("Body error\n")
-		return
-	}
+	body, _ := ioutil.ReadAll(resp.Body)
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(body)
+}
 
-	fmt.Printf("%s", body)
-
-	glog.Flush()
+func main() {
+	router := mux.NewRouter().StrictSlash(true)
+	router.HandleFunc("/", homeLink)
+	router.HandleFunc("/weather", getWeather)
+	glog.Fatal(http.ListenAndServe(":8080", router))
 }
