@@ -6,7 +6,7 @@
         {
              "label": "test run",
             "type": "shell",
-            "command": "go build && ./gotest",
+            "command": "go build -o example && ./example",
             "problemMatcher": [
                 "$go"
             ],
