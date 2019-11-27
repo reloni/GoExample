@@ -1,4 +1,4 @@
-FROM golang:1.13.4-alpine3.10
+FROM golang:1.13.4-alpine3.10 as builder
 
 RUN apk add --no-cache git
 
@@ -11,7 +11,10 @@ RUN go get "github.com/gorilla/mux"
 
 RUN go install -i $GOPATH/src/app
 
-RUN rm -rf $GOPATH/src
+FROM golang:1.13.4-alpine3.10
+WORKDIR $GOPATH
+
+COPY --from=builder $GOPATH/bin $GOPATH/bin
 
 EXPOSE 8080
 USER nobody
