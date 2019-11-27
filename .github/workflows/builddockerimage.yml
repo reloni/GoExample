@@ -1,0 +1,18 @@
+name: Build docker image
+
+on: [label]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set env
+      run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:10})
+    - name: Build the Docker image
+      run: docker build --no-cache -f Dockerfile -t reloni/goexample:$RELEASE_VERSION . && 
+            docker tag reloni/goexample:$RELEASE_VERSION reloni/goexample:latest && \
+            docker push reloni/goexample
