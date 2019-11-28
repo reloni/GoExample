@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
 
-docker build --no-cache -f Dockerfile -t reloni/goexample .
+docker build -f Dockerfile -t reloni/goexample .
