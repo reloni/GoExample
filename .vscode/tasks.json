@@ -14,6 +14,12 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "Build and run debug container",
+            "type": "shell",
+            "command": "sh builddebugimage.sh && sh rundebugcontainer.sh && sleep 1s",
+            "group": "none"
         }
     ]
 }
