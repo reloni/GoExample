@@ -17,7 +17,7 @@
             "env": {},
             "args": [],
             "showLog": true,
-            "trace": "verbose"
+            "trace": "log"
         }
     ]
 }
