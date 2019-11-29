@@ -30,7 +30,7 @@
         {
             "label": "Remove debug container",
             "type": "shell",
-            "command": "docker container rm -f $(docker container ps -a --filter \"name=gotest\" -q)",
+            "command": "docker container stop gotest",
             "group": "none"
         }
     ]

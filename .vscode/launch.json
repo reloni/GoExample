@@ -7,7 +7,7 @@
         {
             "preLaunchTask": "Build and run debug container",
             "postDebugTask": "Remove debug container",
-            "name": "Delve into Docker",
+            "name": "Debug in Docker",
             "type": "go",
             "request": "launch",
             "mode": "remote",
