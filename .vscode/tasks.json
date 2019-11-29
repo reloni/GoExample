@@ -26,6 +26,12 @@
             "type": "shell",
             "command": "sh buildimage.sh && sh runcontainer.sh",
             "group": "none"
+        },
+        {
+            "label": "Remove debug container",
+            "type": "shell",
+            "command": "docker container rm -f $(docker container ps -a --filter \"name=gotest\" -q)",
+            "group": "none"
         }
     ]
 }
