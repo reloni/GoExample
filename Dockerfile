@@ -6,7 +6,6 @@ ENV GOPATH /go
 WORKDIR $GOPATH
 
 ADD ./src ./src/app
-RUN go get "github.com/golang/glog"
 RUN go get "github.com/gorilla/mux"
 RUN go install -i $GOPATH/src/app
 

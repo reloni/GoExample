@@ -5,10 +5,11 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/golang/glog"
+	"log"
 )
 
 func getWeather(w http.ResponseWriter, r *http.Request) {
+	log.Println("Load weather")
 	city := r.URL.Query().Get("city")
 	key := "03add4c278668e54404560d4ff48d568"
 	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/weather?q=%s&APPID=%s", city, key)
@@ -20,7 +21,7 @@ func getWeather(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		message := fmt.Sprintf("{ \"error\": \"Error calling weather service\", \"message\": \"%s\" }", err.Error())
 		w.Write([]byte(message))
-		glog.Error(err.Error())
+		log.Printf("Error: %s", err.Error())
 		return
 	}
 

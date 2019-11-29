@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
-	"github.com/golang/glog"
 	"github.com/gorilla/mux"
 )
 
@@ -16,5 +16,5 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", homeLink)
 	router.HandleFunc("/weather", getWeather)
-	glog.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
