@@ -14,13 +14,13 @@ func getWeather(w http.ResponseWriter, r *http.Request) {
 	key := "03add4c278668e54404560d4ff48d568"
 	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/weather?q=%s&APPID=%s", city, key)
 
-	pool := newPool()
-	conn := pool.Get()
-	str, err := getString(conn, city)
-	if err == nil {
-		log.Printf("Read string: %s", *str)
-	}
-	setString(conn, city, "string")
+	// pool := newPool()
+	// conn := pool.Get()
+	// str, err := getString(conn, city)
+	// if err == nil {
+	// 	log.Printf("Read string: %s", *str)
+	// }
+	// setString(conn, city, "string")
 
 	w.Header().Set("Content-Type", "application/json")
 

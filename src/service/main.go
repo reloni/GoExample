@@ -1,20 +1,18 @@
 package main
 
 import (
-	"fmt"
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
-
-	"github.com/gorilla/mux"
 )
 
-func homeLink(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Welcome home!")
+func healthcheck(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
 }
 
 func main() {
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/", homeLink)
+	router.HandleFunc("/healthcheck", healthcheck)
 	router.HandleFunc("/weather", getWeather)
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
