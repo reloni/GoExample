@@ -1,16 +1,12 @@
-FROM golang:1.13.4-alpine3.10 as builder
-
-RUN apk add --no-cache git
-
-ENV GOPATH /go 
-WORKDIR $GOPATH
+FROM reloni/goexample-base as builder
 
 ADD ./src ./src/app
-RUN go get "github.com/gorilla/mux"
 RUN go install -i $GOPATH/src/app
 
 FROM alpine:3.10
-ENV GOPATH /go 
+ENV CGO_ENABLED=0 \
+    GOPATH=/go \
+    PATH=go/bin:$PATH
 WORKDIR $GOPATH
 
 COPY --from=builder $GOPATH/bin $GOPATH/bin
