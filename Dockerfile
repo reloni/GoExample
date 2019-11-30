@@ -10,8 +10,7 @@ ENV CGO_ENABLED=0 \
 WORKDIR $GOPATH
 
 RUN apk --update --no-cache add curl
-
-COPY --from=builder $GOPATH/bin $GOPATH/bin
+COPY --from=builder $GOPATH/bin/app $GOPATH/bin/
 
 EXPOSE 8080
 USER nobody
