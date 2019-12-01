@@ -1,6 +1,6 @@
 FROM reloni/goexample-base
 
-ADD ./src ./src/app
+ADD ./src/service ./src/app
 RUN go build -gcflags 'all=-N -l' -i -o $GOPATH/bin/app $GOPATH/src/app
 
 EXPOSE 8080 40000

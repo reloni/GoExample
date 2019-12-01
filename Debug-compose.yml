@@ -1,7 +1,7 @@
 version: "3"
 services:
   web:
-    image: reloni/goexample
+    image: reloni/goexampledebug
     container_name: gotest
     security_opt:
       - seccomp:unconfined
