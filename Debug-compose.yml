@@ -1,0 +1,22 @@
+version: "3"
+services:
+  web:
+    image: reloni/goexample
+    container_name: gotest
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - "8080:8080"
+      - "40000:40000"
+    networks:
+      - backend
+      - frontend
+  redis:
+    image: redis:alpine
+    container_name: gotest-redis
+    networks:
+      - backend
+networks:
+  frontend:
+  backend:
+    internal: true

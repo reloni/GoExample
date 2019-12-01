@@ -33,7 +33,7 @@ func newPool() *redis.Pool {
 		MaxIdle:   80,
 		MaxActive: 12000,
 		Dial: func() (redis.Conn, error) {
-			c, err := redis.Dial("tcp", ":6379")
+			c, err := redis.Dial("tcp", "redis:6379")
 			if err != nil {
 				log.Fatal(err.Error())
 			}
