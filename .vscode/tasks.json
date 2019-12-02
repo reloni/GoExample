@@ -6,7 +6,7 @@
         {
              "label": "test run",
             "type": "shell",
-            "command": "go build -o example ./... && ./example",
+            "command": "go build -o example ./src/service/... && ./example",
             "problemMatcher": [
                 "$go"
             ],
@@ -31,6 +31,18 @@
             "label": "Remove debug container",
             "type": "shell",
             "command": "docker container stop gotest",
+            "group": "none"
+        },
+        {
+            "label": "Start debug compose",
+            "type": "shell",
+            "command": "sh builddebugimage.sh && docker-compose -f Debug-compose.yml up -d && sleep 1s",
+            "group": "none"
+        },
+        {
+            "label": "Stop debug compose",
+            "type": "shell",
+            "command": "docker-compose -f Debug-compose.yml stop && docker container rm -f gotest",
             "group": "none"
         }
     ]

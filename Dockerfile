@@ -1,21 +1,22 @@
-FROM golang:1.13.4-alpine3.10 as builder
+FROM reloni/goexample-base as builder
 
-RUN apk add --no-cache git
-
-ENV GOPATH /go 
-WORKDIR $GOPATH
-
-ADD ./src ./src/app
-RUN go get "github.com/gorilla/mux"
-RUN go install -i $GOPATH/src/app
+ADD ./src/service ./src/app
+ADD ./src/healthcheck ./src/healthcheck
+RUN go install -i $GOPATH/src/app && \
+    go install -i $GOPATH/src/healthcheck
 
 FROM alpine:3.10
-ENV GOPATH /go 
+ENV CGO_ENABLED=0 \
+    GOPATH=/go \
+    PATH=go/bin:$PATH
 WORKDIR $GOPATH
 
-COPY --from=builder $GOPATH/bin $GOPATH/bin
+COPY --from=builder $GOPATH/bin/app $GOPATH/bin/
+COPY --from=builder $GOPATH/bin/healthcheck $GOPATH/bin/
 
 EXPOSE 8080
 USER nobody
 
 CMD ["./bin/app"]
+HEALTHCHECK --interval=5m --timeout=3s \
+    CMD ./bin/healthcheck || exit 1
