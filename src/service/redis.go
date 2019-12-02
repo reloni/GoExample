@@ -5,30 +5,35 @@ import (
 	"log"
 )
 
-func setString(c redis.Conn, key string, value string) error {
+func setRedisString(c redis.Conn, key string, value string) error {
 	_, err := c.Do("SET", key, value)
 	if err != nil {
-		log.Printf("Error: %s", err.Error())
+		log.Printf("Redis. Error setting key %s: %s", key, err.Error())
 		return err
 	}
-
-	log.Printf("Set %s in Redis", key)
+	log.Printf("Redis. Set %s", key)
 
 	return nil
 }
 
-// get executes the redis GET command
-func getString(c redis.Conn, key string) (*string, error) {
+func getRedisString(c redis.Conn, key string) (*string, error) {
 	s, err := redis.String(c.Do("GET", key))
 	if err != nil {
-		log.Printf("Error: %s", err.Error())
+		log.Printf("Redis. Error geting key %s: %s", key, err.Error())
 		return nil, err
 	}
 
 	return &s, nil
 }
 
-func newPool() *redis.Pool {
+func setRedisExpire(c redis.Conn, key string, value int) {
+	_, err := c.Do("EXPIRE", key, value)
+	if err != nil {
+		log.Printf("Redis. Error seting expire key %s: %s", key, err.Error())
+	}
+}
+
+func newRedisPool() *redis.Pool {
 	return &redis.Pool{
 		MaxIdle:   80,
 		MaxActive: 12000,
