@@ -9,8 +9,6 @@ import (
 )
 
 func getWeather(w http.ResponseWriter, r *http.Request) {
-	log.Println("Load weather")
-
 	city := r.URL.Query().Get("city")
 	key := "03add4c278668e54404560d4ff48d568"
 	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/weather?q=%s&APPID=%s", city, key)
@@ -24,7 +22,7 @@ func getWeather(w http.ResponseWriter, r *http.Request) {
 
 	cached := getWeatherFromRedis(conn, city)
 	if cached != nil {
-		log.Printf("Read cached string: %s", *cached)
+		log.Printf("Load cached weather")
 		w.Write([]byte(*cached))
 		return
 	}
@@ -38,6 +36,7 @@ func getWeather(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log.Println("Load remote weather")
 	defer resp.Body.Close()
 	body, _ := ioutil.ReadAll(resp.Body)
 
@@ -48,13 +47,13 @@ func getWeather(w http.ResponseWriter, r *http.Request) {
 
 func setWeatherToRedis(c redis.Conn, city string, data []byte) {
 	setRedisString(c, city, string(data))
-	setRedisExpire(c, city, 60)
+	setRedisExpire(c, city, 60*5)
 }
 
 func getWeatherFromRedis(c redis.Conn, city string) *string {
 	str, _ := getRedisString(c, city)
 	if str != nil {
-		setRedisExpire(c, city, 60)
+		setRedisExpire(c, city, 60*5)
 	}
 	return str
 }
