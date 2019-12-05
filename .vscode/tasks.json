@@ -16,21 +16,9 @@
             }
         },
         {
-            "label": "Build and run debug container",
-            "type": "shell",
-            "command": "sh builddebugimage.sh && sh rundebugcontainer.sh && sleep 1s",
-            "group": "none"
-        },
-        {
             "label": "Build and run release container",
             "type": "shell",
             "command": "sh buildimage.sh && sh runcontainer.sh",
-            "group": "none"
-        },
-        {
-            "label": "Remove debug container",
-            "type": "shell",
-            "command": "docker container stop gotest",
             "group": "none"
         },
         {
