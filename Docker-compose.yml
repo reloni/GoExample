@@ -1,13 +1,21 @@
 version: "3"
 services:
-  web:
+  service:
     image: reloni/goexample
     container_name: gotest
+    networks:
+      - backend
+      - frontend
+  reverseproxy:
+    image: nginx:alpine
+    container_name: gotest-reverseproxy
     ports:
       - "8080:8080"
     networks:
       - backend
       - frontend
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
   redis:
     image: redis:alpine
     container_name: gotest-redis

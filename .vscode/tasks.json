@@ -24,7 +24,7 @@
         {
             "label": "Stop release container",
             "type": "shell",
-            "command": "docker-compose -f Docker-compose.yml stop",
+            "command": "docker-compose -f Docker-compose.yml stop && docker container rm -f gotest",
             "group": "none"
         },
         {
