@@ -18,7 +18,13 @@
         {
             "label": "Build and run release container",
             "type": "shell",
-            "command": "sh buildimage.sh && sh runcontainer.sh",
+            "command": "sh buildimage.sh && docker-compose -f Docker-compose.yml up -d",
+            "group": "none"
+        },
+        {
+            "label": "Stop release container",
+            "type": "shell",
+            "command": "docker-compose -f Docker-compose.yml stop",
             "group": "none"
         },
         {
