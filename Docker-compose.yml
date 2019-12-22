@@ -3,14 +3,18 @@ services:
   service:
     image: reloni/goexample
     container_name: gotest
-    networks:
-      - backend
-      - frontend
+    networks: 
+      backend:
+        aliases:
+          - weatherapp-back
+      frontend:
+        aliases:
+          - weatherapp-front
   reverseproxy:
     image: nginx:alpine
     container_name: gotest-reverseproxy
     ports:
-      - "8080:8080"
+      - "8080:80"
     networks:
       - backend
       - frontend
