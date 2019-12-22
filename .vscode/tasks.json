@@ -22,6 +22,12 @@
             "group": "none"
         },
         {
+            "label": "Publish release container",
+            "type": "shell",
+            "command": "sh buildimage.sh && docker push reloni/goexample:latest",
+            "group": "none"
+        },
+        {
             "label": "Stop release container",
             "type": "shell",
             "command": "docker-compose -f Docker-compose.yml stop && docker container rm -f gotest",
