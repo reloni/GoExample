@@ -1,5 +1,5 @@
 #!/bin/bash
 set -e
 
-docker build -f Dockerfile.base -t reloni/goexample-base . && \
-    docker build -f Dockerfile -t reloni/goexample:latest .
+docker build -f dockerfile.base -t reloni/goexample-base . && \
+    docker build -f dockerfile -t reloni/goexample:latest .

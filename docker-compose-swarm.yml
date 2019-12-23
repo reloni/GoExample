@@ -1,0 +1,39 @@
+version: "3"
+services:
+  service:
+    image: reloni/goexample
+    container_name: gotest
+    deploy:
+      mode: global
+    networks: 
+      backend:
+        aliases:
+          - weatherapp-back
+      frontend:
+        aliases:
+          - weatherapp-front
+  reverseproxy:
+    image: nginx:alpine
+    container_name: gotest-reverseproxy
+    deploy:
+      mode: global
+    ports:
+      - "8080:80"
+    networks:
+      - backend
+      - frontend
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+  redis:
+    image: redis:alpine
+    container_name: gotest-redis
+    deploy:
+      placement:
+        constraints:
+          - node.labels.type == main
+    networks:
+      - backend
+networks:
+  frontend:
+  backend:
+    internal: true

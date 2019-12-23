@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-             "label": "test run",
+            "label": "test run",
             "type": "shell",
             "command": "go build -o example ./src/service/... && ./example",
             "problemMatcher": [
@@ -19,7 +19,8 @@
             "label": "Build and run release container",
             "type": "shell",
             "command": "sh buildimage.sh && docker-compose -f Docker-compose.yml up -d",
-            "group": "none"
+            "group": "none",
+            "problemMatcher": []
         },
         {
             "label": "Publish release container",
@@ -31,7 +32,8 @@
             "label": "Stop release container",
             "type": "shell",
             "command": "docker-compose -f Docker-compose.yml stop && docker container rm -f gotest",
-            "group": "none"
+            "group": "none",
+            "problemMatcher": []
         },
         {
             "label": "Start debug compose",
