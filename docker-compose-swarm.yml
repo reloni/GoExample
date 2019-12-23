@@ -36,4 +36,5 @@ services:
 networks:
   frontend:
   backend:
+    driver: overlay
     internal: true
