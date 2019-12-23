@@ -6,12 +6,9 @@ services:
     deploy:
       mode: global
     networks: 
-      backend:
-        aliases:
-          - weatherapp-back
       frontend:
         aliases:
-          - weatherapp-front
+          - weatherapp-back
   reverseproxy:
     image: reloni/goexample-nginx:latest
     container_name: gotest-reverseproxy
@@ -20,7 +17,6 @@ services:
     ports:
       - "8080:80"
     networks:
-      - backend
       - frontend
   redis:
     image: redis:alpine
@@ -30,9 +26,8 @@ services:
         constraints:
           - node.labels.type == main
     networks:
-      - backend
+      - frontend
 networks:
   frontend:
-  backend:
     driver: overlay
-    internal: true
+    internal: false
