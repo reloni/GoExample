@@ -1,7 +1,7 @@
 version: "3"
 services:
   service:
-    image: reloni/goexample
+    image: reloni/goexample:latest
     container_name: gotest
     deploy:
       mode: global
@@ -13,7 +13,7 @@ services:
         aliases:
           - weatherapp-front
   reverseproxy:
-    image: nginx:alpine
+    image: reloni/goexample-nginx:latest
     container_name: gotest-reverseproxy
     deploy:
       mode: global
@@ -22,8 +22,6 @@ services:
     networks:
       - backend
       - frontend
-    volumes:
-      - ./config/nginx/conf.d:/etc/nginx/conf.d
   redis:
     image: redis:alpine
     container_name: gotest-redis

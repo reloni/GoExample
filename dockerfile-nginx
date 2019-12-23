@@ -1,0 +1,6 @@
+FROM nginx:alpine
+
+ADD ./config/nginx/conf.d /etc/nginx/conf.d
+
+EXPOSE 80
+USER nobody
