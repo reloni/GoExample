@@ -18,7 +18,7 @@
         {
             "label": "Build and run release container",
             "type": "shell",
-            "command": "sh buildimage.sh && docker-compose -f Docker-compose.yml up -d",
+            "command": "sh buildimage.sh && docker-compose -f docker-compose.yml up -d",
             "group": "none",
             "problemMatcher": []
         },
@@ -38,13 +38,13 @@
         {
             "label": "Start debug compose",
             "type": "shell",
-            "command": "sh builddebugimage.sh && docker-compose -f Debug-compose.yml up -d && sleep 1s",
+            "command": "sh builddebugimage.sh && docker-compose -f debug-compose.yml up -d && sleep 1s",
             "group": "none"
         },
         {
             "label": "Stop debug compose",
             "type": "shell",
-            "command": "docker-compose -f Debug-compose.yml stop && docker container rm -f gotest",
+            "command": "docker-compose -f debug-compose.yml stop && docker container rm -f gotest",
             "group": "none"
         }
     ]
