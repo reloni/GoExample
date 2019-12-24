@@ -18,5 +18,5 @@ EXPOSE 8080
 USER nobody
 
 CMD ["./bin/app"]
-HEALTHCHECK --interval=5m --timeout=3s \
+HEALTHCHECK --interval=15s --timeout=3s \
     CMD ./bin/healthcheck || exit 1
