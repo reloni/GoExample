@@ -1,0 +1,8 @@
+FROM reloni/goexample-base
+
+ADD ./src/service ./src/app
+RUN go build -gcflags 'all=-N -l' -i -o $GOPATH/bin/app $GOPATH/src/app
+
+EXPOSE 8080 40000
+
+CMD ["dlv", "debug", "app", "--listen=:40000", "--headless=true", "--api-version=2", "--log"]

@@ -12,7 +12,7 @@ development:
   script:
     - sh buildimage.sh
   only:
-    - master
+    - web
 
 stable:
   stage: deploy
