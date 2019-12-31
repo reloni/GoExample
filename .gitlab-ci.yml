@@ -1,0 +1,6 @@
+before_script:
+  - docker info
+
+publish:
+  script:
+    - sh buildimage.sh
