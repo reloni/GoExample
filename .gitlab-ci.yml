@@ -11,6 +11,7 @@ development:
   stage: deploy
   script:
     - sh buildimage.sh
+    - docker push reloni/goexample:latest
   only:
     - web
 
@@ -19,4 +20,5 @@ stable:
   script:
     - sh buildimage.sh
   only:
-    - tags
+    - web
+    - deploy
