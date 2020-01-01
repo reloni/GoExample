@@ -18,6 +18,8 @@ func getWeather(w http.ResponseWriter, r *http.Request) {
 	hostName, hostErr := os.Hostname()
 	if hostErr == nil {
 		w.Header().Set("NodeName", hostName)
+	} else {
+		w.Header().Set("NodeName", "Unknown")
 	}
 
 	pool := newRedisPool()
