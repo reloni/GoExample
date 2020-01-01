@@ -13,6 +13,8 @@ services:
   reverseproxy:
     image: reloni/goexample-nginx:latest
     container_name: gotest-reverseproxy
+    depends_on:
+      - service
     ports:
       - "8080:8080"
     networks:

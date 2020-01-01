@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 )
 
 func getWeather(w http.ResponseWriter, r *http.Request) {
@@ -14,6 +15,10 @@ func getWeather(w http.ResponseWriter, r *http.Request) {
 	url := fmt.Sprintf("http://api.openweathermap.org/data/2.5/weather?q=%s&APPID=%s", city, key)
 
 	w.Header().Set("Content-Type", "application/json")
+	hostName, hostErr := os.Hostname()
+	if hostErr == nil {
+		w.Header().Set("NodeName", hostName)
+	}
 
 	pool := newRedisPool()
 	defer pool.Close()
