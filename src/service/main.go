@@ -7,6 +7,7 @@ import (
 )
 
 func healthcheck(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Healthcheck", "True")
 	w.WriteHeader(http.StatusOK)
 }
 
