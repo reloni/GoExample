@@ -10,9 +10,9 @@ before_script:
 development:
   stage: build
   script:
-    - docker build -f dockerfile.base -t reloni/goexample-base . && \
-        docker build -f dockerfile -t reloni/goexample:$CI_COMMIT_REF_NAME . && \
-        docker push reloni/goexample:$CI_COMMIT_REF_NAME
+    - docker build -f dockerfile.base -t reloni/goexample-base .
+    - docker build -f dockerfile -t reloni/goexample:$CI_COMMIT_REF_NAME .
+    - docker push reloni/goexample:$CI_COMMIT_REF_NAME
   only:
     - deploy
 
