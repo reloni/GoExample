@@ -1,9 +1,3 @@
-image: docker:git
-services:
-  - docker:dind
-variables:
-  DOCKER_DRIVER: overlay
-
 before_script:
   - docker login -u reloni -p d1d22e36-d486-457c-8f92-75aded426cfc
 
@@ -14,12 +8,5 @@ development:
     - docker build -f dockerfile -t reloni/goexample:$CI_COMMIT_REF_NAME .
     - docker push reloni/goexample:$CI_COMMIT_REF_NAME
   only:
-    - deploy
-
-# stable:
-#   stage: deploy
-#   script:
-#     - sh buildimage.sh
-#   only:
-#     - web
-#     - deploy
+    - rick
+    - morty
