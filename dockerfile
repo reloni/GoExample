@@ -15,7 +15,7 @@ COPY --from=builder $GOPATH/bin/app $GOPATH/bin/
 COPY --from=builder $GOPATH/bin/healthcheck $GOPATH/bin/
 
 EXPOSE 8080
-USER nobody
+USER 405
 
 CMD ["./bin/app"]
 HEALTHCHECK --interval=15s --timeout=3s \
