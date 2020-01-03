@@ -16,11 +16,10 @@ func getWeather(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	hostName, hostErr := os.Hostname()
-	if hostErr == nil {
-		w.Header().Set("NodeName", hostName)
-	} else {
-		w.Header().Set("NodeName", "Unknown")
+	if hostErr != nil {
+		hostName = "Unknown"
 	}
+	w.Header().Set("NodeName", hostName)
 
 	pool := newRedisPool()
 	defer pool.Close()
@@ -29,7 +28,7 @@ func getWeather(w http.ResponseWriter, r *http.Request) {
 
 	cached := getWeatherFromRedis(conn, city)
 	if cached != nil {
-		log.Printf("Load cached weather")
+		log.Printf("Load cached weather. Host: %s", hostName)
 		w.Write([]byte(*cached))
 		return
 	}
