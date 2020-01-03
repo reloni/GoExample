@@ -21,7 +21,7 @@ services:
       - backend
       - frontend
   redis:
-    image: redis:alpine
+    image: reloni/goexample-redis:latest
     container_name: gotest-redis
     networks:
       - backend

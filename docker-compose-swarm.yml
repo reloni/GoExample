@@ -19,7 +19,7 @@ services:
     networks:
       - frontend
   redis:
-    image: redis:alpine
+    image: reloni/goexample-redis:latest
     container_name: gotest-redis
     deploy:
       placement:
