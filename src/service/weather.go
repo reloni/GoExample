@@ -29,9 +29,12 @@ func getWeather(w http.ResponseWriter, r *http.Request) {
 	cached := getWeatherFromRedis(conn, city)
 	if cached != nil {
 		log.Printf("Load cached weather. Host: %s", hostName)
+		w.Header().Set("IsCached", "true")
 		w.Write([]byte(*cached))
 		return
 	}
+
+	w.Header().Set("IsCached", "false")
 
 	resp, err := http.Get(url)
 	if err != nil {
