@@ -20,6 +20,7 @@ jobs:
     working_directory: /go/src/github.com/{{ORG_NAME}}/{{REPO_NAME}}
     steps:
       - checkout
+      - setup_remote_docker
       - run: docker build -f dockerfile.base -t reloni/goexample-base .
       - run: docker build -f dockerfile -t reloni/goexample:$circleci .
       - run: docker push reloni/goexample:circleci
