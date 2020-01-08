@@ -18,6 +18,21 @@
             "args": [],
             "showLog": true,
             "trace": "log",
+        },
+        {
+            "name": "Debug with telepresence",
+            "preLaunchTask": "Start debug single",
+            "postDebugTask": "Delete gotest container",
+            "type": "go",
+            "request": "launch",
+            "mode": "remote",
+            "program": "${workspaceRoot}/src/service",
+            "remotePath": "/go/src/app",
+            "port": 40000,
+            "env": {},
+            "args": [],
+            "showLog": true,
+            "trace": "log",
         }
     ]
 }

@@ -3,3 +3,4 @@
 /.DS_Store
 /Docker-compose.yml
 /Debug-compose.yml
+/telepresence.log
