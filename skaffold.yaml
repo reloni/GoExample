@@ -1,0 +1,13 @@
+apiVersion: skaffold/v2alpha1
+kind: Config
+metadata:
+  name: gotest
+build:
+  artifacts:
+  - image: reloni/goexample
+    docker:
+      dockerfile: dockerfile
+deploy:
+  kubectl:
+    manifests:
+    - gotest.yaml
