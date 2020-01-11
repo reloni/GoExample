@@ -51,7 +51,8 @@
             "label": "Start telepresence",
             "type": "shell",
             "command": "telepresence --swap-deployment gotest-app-morty --expose 8080",
-            "group": "none"
+            "group": "none",
+            "problemMatcher": []
         }
     ]
 }
