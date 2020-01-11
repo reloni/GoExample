@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/gomodule/redigo/redis"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/gomodule/redigo/redis"
 )
 
 func getWeather(w http.ResponseWriter, r *http.Request) {
@@ -61,8 +62,5 @@ func setWeatherToRedis(c redis.Conn, city string, data []byte) {
 
 func getWeatherFromRedis(c redis.Conn, city string) *string {
 	str, _ := getRedisString(c, city)
-	if str != nil {
-		setRedisExpire(c, city, 60*5)
-	}
 	return str
 }
